@@ -1,5 +1,5 @@
 import pygame
-
+from level1 import start_level1
 WIDTH, HEIGHT = 420, 250
 BUTTON_WIDTH, BUTTON_HEIGHT = 100, 50
 
@@ -35,6 +35,8 @@ while run:
                 for i, button in enumerate(buttons):
                     if button.collidepoint(event.pos):
                         print("hi")
+                        level = i + 1
+                        exec(f"start_level{level}()")
 
 
 
@@ -43,7 +45,12 @@ while run:
     for i, button in enumerate(buttons):
         if button.collidepoint(pygame.mouse.get_pos()):
             screen.blit(dark_button_image, button)
-        else
+        else:
             screen.blit(button_image, button)
-
+        font = pygame.font.SysFont(None,30)
+        text = font.render(str(i+1),True,BLACK)
+        text_rect = text.get_rect(center = button.center)
+        screen.blit(text, text_rect)
     pygame.display.flip()
+
+
